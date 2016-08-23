@@ -6,6 +6,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.godmonth.topia.commons.basic.exception.ErrorCodeException;
 import com.godmonth.topia.commons.rpc.BusinessCode;
 import com.godmonth.topia.commons.rpc.ListResultResponse;
 import com.godmonth.topia.commons.rpc.SystemCode;
@@ -35,6 +36,14 @@ public class ListResultResponseUtils<T> {
 
 	public static <T> ListResultResponse<T> failureResultResponse(String message) {
 		return codeListResultResponse(null, SystemCode.FAILURE, null, message);
+	}
+
+	public static <T> ListResultResponse<T> errorCodeExceptionListResultResponse(ErrorCodeException e) {
+		ListResultResponse<T> rr = new ListResultResponse<T>();
+		rr.setSystemCode(SystemCode.SUCCESS);
+		rr.setBusinessCode(e.getErrorCode());
+		rr.setMessage(e.getMessage());
+		return rr;
 	}
 
 	public static <T> ListResultResponse<T> exceptionListResultResponse(Throwable throwable) {
