@@ -191,6 +191,11 @@
 			<artifactId>javax.el-api</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.jodd</groupId>
+			<artifactId>jodd-bean</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<scope>test</scope>
