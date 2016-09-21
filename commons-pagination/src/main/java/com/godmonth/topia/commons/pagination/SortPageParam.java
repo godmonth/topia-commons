@@ -1,5 +1,8 @@
 package com.godmonth.topia.commons.pagination;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -16,7 +19,7 @@ public class SortPageParam extends PageParam {
 	/**
 	 * 排序
 	 */
-	private SortParam sortParam;
+	private List<SortParam> sortParamList;
 
 	public SortPageParam() {
 	}
@@ -32,15 +35,30 @@ public class SortPageParam extends PageParam {
 
 	public SortPageParam(int number, int size, SortParam sortParam) {
 		super(number, size);
-		this.sortParam = sortParam;
+		List<SortParam> list = new ArrayList<SortParam>();
+		list.add(sortParam);
+		this.sortParamList = list;
 	}
 
-	public SortParam getSortParam() {
-		return sortParam;
+	public SortPageParam(int number, int size, List<SortParam> sortParamList) {
+		super(number, size);
+		this.sortParamList = sortParamList;
 	}
 
-	public void setSortParam(SortParam sortParam) {
-		this.sortParam = sortParam;
+	public List<SortParam> getSortParamList() {
+		return sortParamList;
+	}
+
+	public void setSortParamList(List<SortParam> sortParamList) {
+		this.sortParamList = sortParamList;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).appendSuper(super.toString())
+				.append("sortParamList", this.sortParamList).toString();
 	}
 
 	/**
@@ -51,26 +69,16 @@ public class SortPageParam extends PageParam {
 			return false;
 		}
 		SortPageParam rhs = (SortPageParam) object;
-		return new EqualsBuilder().appendSuper(super.equals(object))
-				.append(this.sortParam, rhs.sortParam).isEquals();
+		return new EqualsBuilder().appendSuper(super.equals(object)).append(this.sortParamList, rhs.sortParamList)
+				.isEquals();
 	}
 
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return new HashCodeBuilder(-757353235, 2131736175)
-				.appendSuper(super.hashCode()).append(this.sortParam)
+		return new HashCodeBuilder(-1143119417, 1396470783).appendSuper(super.hashCode()).append(this.sortParamList)
 				.toHashCode();
-	}
-
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-				.appendSuper(super.toString())
-				.append("sortParam", this.sortParam).toString();
 	}
 
 }
