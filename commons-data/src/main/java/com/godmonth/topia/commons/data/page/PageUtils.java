@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort.Order;
 import com.godmonth.topia.commons.pagination.PageParam;
 import com.godmonth.topia.commons.pagination.SortPageParam;
 import com.godmonth.topia.commons.pagination.SortParam;
-import com.google.common.collect.Lists;
 
 public class PageUtils {
 	private PageUtils() {
@@ -22,8 +21,8 @@ public class PageUtils {
 		return convert((PageParam) pageParam, pageParam.getSortParamList());
 	}
 
-	public static PageRequest convert(PageParam pageParam, SortParam sortParam) {
-		return convert(pageParam, Lists.newArrayList(sortParam));
+	public static PageRequest convert(PageParam pageParam) {
+		return convert(pageParam, null);
 	}
 
 	public static PageRequest convert(PageParam pageParam, List<SortParam> sortParamList) {
