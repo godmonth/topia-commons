@@ -24,7 +24,7 @@ public class PageTransformer {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static Pagination<?> transform(Page<?> page) {
+	public static <T> Pagination<T> transform(Page<T> page) {
 		if (page == null) {
 			return null;
 		}

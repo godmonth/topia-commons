@@ -13,7 +13,7 @@ public class PageTransformerTest {
 	public void transform() {
 		PageImpl<String> s = new PageImpl<>(Arrays.asList("a", "b"));
 		System.out.println(s);
-		Pagination<?> pagination = PageTransformer.transform(s);
+		Pagination<String> pagination = PageTransformer.transform(s);
 		System.out.println(pagination);
 	}
 }
