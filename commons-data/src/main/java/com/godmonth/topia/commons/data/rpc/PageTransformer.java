@@ -23,12 +23,11 @@ public class PageTransformer {
 		return pagination;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static <T> Pagination<T> transform(Page<T> page) {
 		if (page == null) {
 			return null;
 		}
-		Pagination pagination = new Pagination();
+		Pagination<T> pagination = new Pagination<T>();
 		pagination.setTotalElements(page.getTotalElements());
 		pagination.setTotalPages(page.getTotalPages());
 		pagination.setItems(page.getContent());
