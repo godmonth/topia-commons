@@ -23,4 +23,17 @@ public class PageTransformer {
 		return pagination;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static Pagination<?> transform(Page<?> page) {
+		if (page == null) {
+			return null;
+		}
+		Pagination pagination = new Pagination();
+		pagination.setTotalElements(page.getTotalElements());
+		pagination.setTotalPages(page.getTotalPages());
+		pagination.setItems(page.getContent());
+		pagination.setSortPageParam(
+				new SortPageParam(page.getNumber(), page.getSize(), SortUtils.convert(page.getSort())));
+		return pagination;
+	}
 }
