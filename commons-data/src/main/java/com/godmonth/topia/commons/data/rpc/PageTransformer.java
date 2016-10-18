@@ -1,7 +1,10 @@
 package com.godmonth.topia.commons.data.rpc;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
+import com.godmonth.topia.commons.data.page.PageUtils;
 import com.godmonth.topia.commons.data.page.SortUtils;
 import com.godmonth.topia.commons.pagination.Pagination;
 import com.godmonth.topia.commons.pagination.SortPageParam;
@@ -34,5 +37,13 @@ public class PageTransformer {
 		pagination.setSortPageParam(
 				new SortPageParam(page.getNumber(), page.getSize(), SortUtils.convert(page.getSort())));
 		return pagination;
+	}
+
+	public static <T> Page<T> transform(Pagination<T> pagination) {
+		if (pagination == null) {
+			return null;
+		}
+		PageRequest pageRequest = PageUtils.convert(pagination.getSortPageParam());
+		return new PageImpl<T>(pagination.getItems(), pageRequest, pagination.getTotalElements());
 	}
 }
