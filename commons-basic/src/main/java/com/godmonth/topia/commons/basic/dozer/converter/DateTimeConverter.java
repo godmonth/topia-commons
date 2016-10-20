@@ -2,22 +2,30 @@ package com.godmonth.topia.commons.basic.dozer.converter;
 
 import java.util.Date;
 
-import org.dozer.CustomConverter;
-import org.dozer.MappingException;
+import org.dozer.DozerConverter;
 import org.joda.time.DateTime;
 
-public class DateTimeConverter implements CustomConverter {
-	public Object convert(Object destination, Object source, Class destClass, Class sourceClass) {
-		if (source == null) {
+public class DateTimeConverter extends DozerConverter<DateTime, Date> {
+	public DateTimeConverter() {
+		super(DateTime.class, Date.class);
+	}
+
+	@Override
+	public Date convertTo(DateTime source, Date destination) {
+		if (source != null) {
+			return source.toDate();
+		} else {
 			return null;
 		}
-		if (source instanceof Date) {
+	}
+
+	@Override
+	public DateTime convertFrom(Date source, DateTime destination) {
+		if (source != null) {
 			return new DateTime(source);
-		} else if (source instanceof DateTime) {
-			return ((DateTime) source).toDate();
 		} else {
-			throw new MappingException("Converter TestCustomConverter used incorrectly. Arguments passed in were:"
-					+ destination + " and " + source);
+			return null;
 		}
 	}
+
 }
